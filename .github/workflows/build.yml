@@ -1,0 +1,19 @@
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    defaults:
+      run:
+        shell: bash
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: actions/setup-python@v7
+      with:
+        python-version: pypy-3.11
+    - run: python -m pip install --upgrade pip
+    - run: pip install pycryptodomex
+    - run: python repro.py
